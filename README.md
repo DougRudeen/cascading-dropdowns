@@ -16,5 +16,4 @@ the user input to $C$1.
 
 
 ## How this works
-The code works by allowing the user to store nested objects in JSON format in the instant Google Sheet's 'document properties.'  When the user wants to declare a new series
-of cascading dropdown menus
+The code works by allowing the user to store nested objects in JSON format in the instant Google Sheet's 'document properties.'  When the user wants to declare a new series of cascading dropdown menus, they can do so using the modular dialog boxes that open from the 'Custom' option in the start menu.
