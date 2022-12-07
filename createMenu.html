@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <script>
+      function getCreateVals(){
+        var obj = {};
+        
+        obj.optsRange = document.getElementById("optsRange").value;
+        obj.ddsRange = document.getElementById("ddsRange").value;
+
+        google.script.run.createDDs(obj);
+        Console.log("Ranges Entered");
+        closeDialog()
+      }
+      function closeDialog(){
+        google.script.host.close();
+        Console.log("Create Canceled")
+
+      }
+    </script>
+    <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons1.css">
+
+  </head>
+  <body>
+    <div class = 'inline form-group'>
+      <label for ='Options_Range'>Range of Dropdown Options:</label>
+      <input type = 'text' id = 'optsRange'style="width: 200px;">
+
+    </div>
+    <br></br>
+    <div class = 'inline form-group'>
+      <label for ='Dropdowns_Range'>Range of Dropdown Menus:</label>
+      <input type = 'text' id = 'ddsRange'style="width: 200px;">
+
+    </div>
+    <br></br>
+    <br></br>
+    <br></br>
+    <input type = 'button' value = 'Cancel' onclick = 'closeDialog()'>
+    <input type = 'button' value = 'Save' onclick = 'getCreateVals()'>
+  </body>
+</html>
