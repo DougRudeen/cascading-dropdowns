@@ -7,8 +7,11 @@ function testFunction() {
   //var testResult = nestObj(range);
   //Logger.log(testResult)
 
-  areDDs()
-  deleteDocProps()
+  //areDDs()
+  //deleteDocProps()
 
+  var name = "dropdown_2";
+  var nameArr = name.split("_");
+  Logger.log(parseInt(nameArr[1]));
 
 }

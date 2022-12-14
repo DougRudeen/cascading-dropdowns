@@ -27,7 +27,8 @@ function createNew() {
  * a nested object using the nestObj() function.
  * 
  * @obj - an object containing two strings as values.  First string is the range where
- * the dropdown menu options are stored in hierarchical order, the second string is where the 
+ * the dropdown menu options are stored in hierarchical order.  The second string is where
+ * the dropdown menus will be built
  *   
  */
 function createDDs(obj){
@@ -36,14 +37,51 @@ function createDDs(obj){
 
   areDDs();
   var ddObj = JSON.parse(dProps.getProperties()['dropdowns']);
-  var count = countProp(ddObj);
+  var keysArr = ddObj.keys();
+  
+  /*var count = countProp(ddObj);
+
+  if (count > 0){
+
+    //if there aren't any dropdowns in the 'dropdowns' object, find the
+    //nth most dropdown object, parse its number (can't use a count variable here
+    // becaue the numbers migth not map to the number of dropdown objects)
+    
+    
+    var lastKey = keysArr.slice(-1)[0];
+    var lastKeyNum = lastKey.split("_");
+    var lastKeyNum = parseInt(lastKeyNum[1]) + 1;
+    ss.getRange("Sheet1!F6").setValue(lastKeyNum);
+    var lastKeyNum = lastKeyNum.toString();
+    var name = "dropdown_" + lastKeyNum;
+
+
+
+  };*/
 
   //TODO: error handling.  If this throws an error, it means that the original objects were 
   //misnnamed in the html document.  This is probably not as essential since I don't see
   // a condition where this would actually happen.
 
+  //TODO: error handling: there needs to be a way of determining whether or not the
+
   var optsRng  = obj.optsRange;
   var ddsRng = obj.ddsRange;
+
+  //alternative to the thing above, name the dropdown ranges after the optsRng object
+  // this is better for error handling
+
+  if(optsRng in ddObj){
+    if (ddsRngoptsRng[ddObj]){
+
+    };
+
+  };
+
+  var optsVals = ss.getRange(optsRng).getValues();
+  var ddObjInner = nestObj(optsVals)
+
+  ddObj[name] = ddObjInner;
 
   //TODO:if there are already dropdowns in the target range set in user properties, overwrite
   // the existing menus with the new one being declared.  A structured error message might be 
@@ -52,7 +90,8 @@ function createDDs(obj){
   //for them right away.
 
   ss.getRange("Sheet1!F2").setValue(JSON.stringify(ddObj));
-  ss.getRange("Sheet1!F3").setValue(count);
+  ss.getRange("Sheet1!F3").setValue(JSON.stringify(ddObjInner));
+  ss.getRange("Sheet1!F5").setValue(count);
 
 }
 
@@ -69,7 +108,7 @@ function areDDs(){
   var newObj = {"dropdowns":{}};
 
   //Logger.log(JSON.stringify(dProps));
-  //Logger.log(dProps.getProperties()['dropdowns']);
+  Logger.log(dProps.getProperties()['dropdowns']);
   //Logger.log('boolean: ' + bool);
 
   //if there is not a dropdown object, create one
@@ -77,13 +116,11 @@ function areDDs(){
 
   if(bool === true){
     dProps.setProperties(newObj)
-  }
+  };
   
-  //Logger.log("updated boolean : "+ (dProps.getProperties()['dropdowns'] == null))
-  //Logger.log("getProperties : " + JSON.stringify(dProps.getProperties()['dropdowns']));
-  //Logger.log(dProps.getProperties.hasOwnProperty('dropdowns'));
-  //Logger.log(JSON.stringify(dProps.getProperties()['dropdowns']))
 
+  //Logger.log(JSON.stringify(dProps.getProperties()['dropdowns']));
+  //Logger.log(dProps.getProperties()['dropdowns'])
 }
 
 /**
